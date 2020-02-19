@@ -1,10 +1,10 @@
 {
-  "name": "vredux-cli",
-  "version": "1.0.1",
-  "description": "simple redux cli",
+  "name": "vreact-cli",
+  "version": "1.0.0",
+  "description": "simple react cli",
   "main": "index.js",
   "bin": {
-    "vredux": "index.js"
+    "vreact": "index.js"
   },
   "scripts": {
     "start": ""
@@ -18,12 +18,12 @@
     "json": "^9.0.6",
     "lodash": "^4.17.15"
   },
-  "homepage": "https://github.com/UVcoder/redux-cli",
+  "homepage": "https://github.com/UVcoder/vreact-cli",
   "repository": {
     "type": "git",
-    "url": "https://github.com/UVcoder/redux-cli"
+    "url": "https://github.com/UVcoder/vreact-cli"
   },
   "keywords": [
-    "redux cli redux-cli cli-redux"
+    "react cli cli-react react-cli"
   ]
 }
