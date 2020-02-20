@@ -4,8 +4,8 @@ this cli comes with
 
 ### v1
 
-react cli
-redux cli
+react cli <br>
+redux cli <br>
 as the version grows, i hope to add more cli
 
 any suggestion visit:
@@ -15,6 +15,14 @@ https://github.com/UVcoder/cli-uv
 ## install
 
 > `npm i -g cli-uv`
+
+### Note\*
+
+to be able to run this command
+
+> `uv rc users/admin`
+
+you need to install it globally;
 
 ## React Cli
 
