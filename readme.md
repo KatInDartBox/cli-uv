@@ -1,28 +1,131 @@
-# redux-cli
+# cli-uv
 
-it takes hundred of files talking to each others,
-so that your application can be aware of a user click on a red button.
-<br>redux cli will help u create boilerplate files.
+this cli comes with
 
-the thing is these files are generated base on my own need.
+### v1
+
+react cli
+redux cli
+as the version grows, i hope to add more cli
+
 any suggestion visit:
 
-https://github.com/UVcoder/redux-cli
+https://github.com/UVcoder/cli-uv
 
 ## install
 
-> `npm i -g vredux-cli`
+> `npm i -g cli-uv`
 
-## Command
+## React Cli
 
 Run
 
-> `vredux all <path>`
+> `uv rc <path>`
 
 <br>
 Example
 
-> `vredux all redux/users`
+> `uv rc pages/users-admin`
+
+this will create the following files,
+
+```
+project
+└─ node_modules
+└─ public
+└─ src
+│   └─ pages
+│   │   └─ users-admin
+│   │   │   │ users-admin.jsx
+│   │   │   │ users-admin.styles.scss
+
+```
+
+<br>
+
+## users-admin.jsx
+
+```javascript
+import React from "react";
+// import PropTypes from 'prop-types';
+import "./users-admin.styles.scss";
+
+const UsersAdmin = () => {
+  return <div className="usersAdmin"></div>;
+};
+// UsersAdmin.propTypes = {
+// }
+
+export default UsersAdmin;
+```
+
+## users-styles.scss
+
+```javascript
+.usersAdmin{
+
+}
+```
+
+## command
+
+| cmd short | cmd full        | default | description          |
+| --------- | --------------- | ------- | -------------------- |
+| none      | - - css         | false   | use scss style       |
+| -m        | - - styleModule | false   | style without module |
+| -s        | - - single      | false   | without style file   |
+| -c        | - - reactClass  | false   | user react function  |
+
+### Note\*
+
+the above command if provided, its value becomes true;
+
+### example
+
+> `uv rc components/card-gold -m`
+
+this will generate
+
+```
+project
+└─ node_modules
+└─ public
+└─ src
+│   └─ components
+│   │   └─ card-gold
+│   │   │   │ card-gold.jsx
+│   │   │   │ card-gold.styles.module.scss
+
+```
+
+<br>
+
+> `uv rc components/card-gold -m --css`
+
+this will generate
+
+```
+project
+└─ node_modules
+└─ public
+└─ src
+│   └─ components
+│   │   └─ card-gold
+│   │   │   │ card-gold.jsx
+│   │   │   │ card-gold.styles.css
+
+```
+
+## Redux Cli
+
+Run
+
+> `uv rd <path>`
+
+<br>
+Example
+
+> `uv rd redux/users-admin`
 
 this will create the following files,
 
@@ -32,12 +135,12 @@ project
 └─ public
 └─ src
 │   └─ redux
-│   │   └─ users
-│   │   │   │ users.action.js
-│   │   │   │ users.reducer.js
-│   │   │   │ users.selector.js
-│   │   │   │ users.type.js
-│   │   │   │ users.util.js
+│   │   └─ users-admin
+│   │   │   │ users-admin.action.js
+│   │   │   │ users-admin.reducer.js
+│   │   │   │ users-admin.selector.js
+│   │   │   │ users-admin.type.js
+│   │   │   │ users-admin.util.js
 
 ```
 
@@ -46,14 +149,14 @@ project
 ## action.js
 
 ```javascript
-import { UsersType } from "./users.type";
+import { UsersAdminType } from "./users-admin.type";
 
 /**
  * @type {(initState:boolean)=>{type:string,payload:any}}
  */
-export const UsersToggle = item => {
+export const UsersAdminToggle = item => {
   return {
-    type: UsersType.toggle,
+    type: UsersAdminType.toggle,
     payload: item
   };
 };
@@ -62,7 +165,7 @@ export const UsersToggle = item => {
 ## reducer.js
 
 ```javascript
-import { UsersType } from "./users.type";
+import { UsersAdminType } from "./users-admin.type";
 
 const InitState = {
   // items: [],
@@ -83,9 +186,9 @@ const InitState = {
 /**
  * @type {(state:State,action:Action)=>VoidFunction}
  */
-const UsersReducer = (state = InitState, action) => {
+const UsersAdminReducer = (state = InitState, action) => {
   switch (action.type) {
-    case UsersType.toggle:
+    case UsersAdminType.toggle:
       return {
         ...state
       };
@@ -94,7 +197,7 @@ const UsersReducer = (state = InitState, action) => {
   }
 };
 
-export default UsersReducer;
+export default UsersAdminReducer;
 ```
 
 ## selector.js
@@ -102,9 +205,9 @@ export default UsersReducer;
 ```javascript
 import { createSelector } from "reselect";
 
-const baseState = state => state.users;
+const baseState = state => state.usersAdmin;
 
-export const UsersGetState = createSelector([baseState], state => {
+export const UsersAdminGetState = createSelector([baseState], state => {
   return state;
 });
 ```
@@ -112,7 +215,7 @@ export const UsersGetState = createSelector([baseState], state => {
 ## type.js
 
 ```javascript
-export const UsersType = {
+export const UsersAdminType = {
   toggle: "toggle"
 };
 ```

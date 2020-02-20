@@ -1,15 +1,15 @@
 {
-  "name": "vreact-cli",
+  "name": "cli-uv",
   "version": "1.0.0",
-  "description": "simple react cli",
+  "description": "simple react & redux cli",
   "main": "index.js",
   "bin": {
-    "vreact": "index.js"
+    "uv": "index.js"
   },
   "scripts": {
     "start": ""
   },
-  "author": "vichetch",
+  "author": "uk vichetch",
   "license": "MIT",
   "dependencies": {
     "colors": "^1.3.0",
@@ -18,12 +18,12 @@
     "json": "^9.0.6",
     "lodash": "^4.17.15"
   },
-  "homepage": "https://github.com/UVcoder/vreact-cli",
+  "homepage": "https://github.com/UVcoder/cli-uv",
   "repository": {
     "type": "git",
-    "url": "https://github.com/UVcoder/vreact-cli"
+    "url": "https://github.com/UVcoder/cli-uv"
   },
   "keywords": [
-    "react cli cli-react react-cli"
+    "react cli cli-react react-cli redux cli-redux redux-cli"
   ]
 }
