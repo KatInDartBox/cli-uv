@@ -235,3 +235,9 @@ export const UsersAdminType = {
 //   return [...existingItems, itemToBeAdded];
 // };
 ```
+
+## but-fix
+
+### v1.0.1
+
+fix component & style namespace
