@@ -1,6 +1,6 @@
 import React from "react";
+import ___module "./___className-___cssTail";
 // import PropTypes from 'prop-types';
-import ___module "./___className.___cssTail";
 
 const ___ClassName = () => {
   return <div className=___quoteLeft___style___classNameCamel___quoteRight></div>;

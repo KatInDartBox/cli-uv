@@ -20,13 +20,13 @@ const createReact = async (userPath, cmd) => {
 };
 
 function addStyle(userPath, styleTail) {
-  const destPath = getDestPath(userPath, `${styleTail}`);
+  const destPath = getDestPath(userPath, `-${styleTail}`);
   const name = _.camelCase(getDestName(userPath));
   return modifyFile(reactPath.style, destPath, ["___className"], [name]);
 }
 
 function addComponent(isClass, userPath, includeStyle, styleTail, isModule) {
-  const destPath = getDestPath(userPath, "jsx");
+  const destPath = getDestPath(userPath, "-component.jsx");
   const name = getDestName(userPath);
   const nameUp = _.upperFirst(_.camelCase(name));
   const nameCamel = _.camelCase(name);
@@ -56,7 +56,7 @@ function addComponent(isClass, userPath, includeStyle, styleTail, isModule) {
       reactPath[com],
       destPath,
       [
-        `import ___module "./___className.___cssTail";`,
+        `import ___module "./___className-___cssTail";`,
         `className=___quoteLeft___style___classNameCamel___quoteRight`,
         "___ClassName",
         "___classNameCamel",
@@ -94,7 +94,7 @@ const reactPath = {
 function getDestPath(path, tailing) {
   const folder = path.split("/");
   const name = folder[folder.length - 1].toLocaleLowerCase();
-  return `./src/${path}/${name}.${tailing}`;
+  return `./src/${path}/${name}${tailing}`;
 }
 function getDestName(path) {
   const folder = path.split("/");

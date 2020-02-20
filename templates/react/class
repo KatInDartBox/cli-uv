@@ -1,5 +1,5 @@
 import React from "react";
-import ___module "./___className.___cssTail";
+import ___module "./___className-___cssTail";
 // import PropTypes from 'prop-types';
 
 class ___ClassName extends React.Component {
