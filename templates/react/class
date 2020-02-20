@@ -8,7 +8,7 @@ class ___ClassName extends React.Component {
     this.state = {};
   }
   render() {
-    return <div className=___quoteLeft___style___className___quoteRight></div>;
+    return <div className=___quoteLeft___style___classNameCamel___quoteRight></div>;
   }
 }
 // ___ClassName.propTypes = {};

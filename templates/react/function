@@ -3,7 +3,7 @@ import React from "react";
 import ___module "./___className.___cssTail";
 
 const ___ClassName = () => {
-  return <div className=___quoteLeft___style___className___quoteRight></div>;
+  return <div className=___quoteLeft___style___classNameCamel___quoteRight></div>;
 };
 // ___ClassName.propTypes = {
 // }

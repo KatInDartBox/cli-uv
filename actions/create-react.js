@@ -21,7 +21,7 @@ const createReact = async (userPath, cmd) => {
 
 function addStyle(userPath, styleTail) {
   const destPath = getDestPath(userPath, `${styleTail}`);
-  const name = getDestName(userPath);
+  const name = _.camelCase(getDestName(userPath));
   return modifyFile(reactPath.style, destPath, ["___className"], [name]);
 }
 
@@ -29,6 +29,7 @@ function addComponent(isClass, userPath, includeStyle, styleTail, isModule) {
   const destPath = getDestPath(userPath, "jsx");
   const name = getDestName(userPath);
   const nameUp = _.upperFirst(_.camelCase(name));
+  const nameCamel = _.camelCase(name);
   const com = isClass ? "class" : "function";
   const iModule = isModule ? "style from" : "";
   const quoteLeft = isModule ? "{" : `"`;
@@ -38,8 +39,17 @@ function addComponent(isClass, userPath, includeStyle, styleTail, isModule) {
     return modifyFile(
       reactPath[com],
       destPath,
-      ["___ClassName", "___className", "___cssTail", "___module", "___quoteLeft", "___quoteRight", "___style"],
-      [nameUp, name, styleTail, iModule, quoteLeft, quoteRight, style]
+      [
+        "___ClassName",
+        "___classNameCamel",
+        "___className",
+        "___cssTail",
+        "___module",
+        "___quoteLeft",
+        "___quoteRight",
+        "___style"
+      ],
+      [nameUp, nameCamel, name, styleTail, iModule, quoteLeft, quoteRight, style]
     );
   } else {
     return modifyFile(
@@ -47,15 +57,16 @@ function addComponent(isClass, userPath, includeStyle, styleTail, isModule) {
       destPath,
       [
         `import ___module "./___className.___cssTail";`,
-        `className=___quoteLeft___style___className___quoteRight`,
+        `className=___quoteLeft___style___classNameCamel___quoteRight`,
         "___ClassName",
+        "___classNameCamel",
         "___className",
         "___module",
         "___quoteLeft",
         "___quoteRight",
         "___style"
       ],
-      ["", "", nameUp, name, iModule, quoteLeft, quoteRight, style]
+      ["", "", nameUp, nameCamel, name, iModule, quoteLeft, quoteRight, style]
     );
   }
 }
