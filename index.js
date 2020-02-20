@@ -5,6 +5,7 @@ const colors = require("colors");
 
 // execute file
 const createReact = require("./actions/create-react");
+const createRedux = require("./actions/create-redux");
 
 program.version("1.0.0");
 
@@ -16,4 +17,8 @@ program
   .option("-c,--reactClass", "react class; default:false, render function")
   .action(createReact);
 
+program
+  .command("rd <path>")
+  // .option("-t,--template", "include boiler plate?")
+  .action(createRedux);
 program.parse(process.argv);

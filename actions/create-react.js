@@ -1,5 +1,5 @@
 const modifyFile = require("../node-fnc/modify-file");
-const appCliPath = require("../node-fnc/get-source-path");
+const appCliPath = require("../node-fnc/get-source-path")();
 const path = require("path");
 const _ = require("lodash");
 
