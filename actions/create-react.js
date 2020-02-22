@@ -4,7 +4,10 @@ const path = require("path");
 const _ = require("lodash");
 
 const createReact = async (userPath, cmd) => {
+  const regex = /[<>:"\\|?*;'.]/gi;
+  userPath = userPath.replace(regex, "-").toLocaleLowerCase();
   console.log("requested path".cyan, userPath);
+
   // const style = cmd.css?"css":"scss";
   const { css = false, styleModule = false, single = false, reactClass = false } = cmd;
   const styleTail = getStyleTail(styleModule, css);

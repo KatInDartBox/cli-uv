@@ -1,16 +1,24 @@
 # cli-uv
 
-this cli comes with
+facebook gave us react, literately only react; they dont care what technology, what framework, we do with react;
+seems like, they gave us a really good meal without a spoon; this cli aims to be a spoon however not completely, but somehow
+to speed up your coding experience;
 
-### v1
+this cli comes with react cli, redux cli, and mores to come;
+use react cli when u want to add new react component/style without manually creating it;
+redux cli comes with 5 boilerplate files, which help speed up your app development a lot,
+unless you do it manually;
 
-react cli <br>
-redux cli <br>
-as the version grows, i hope to add more cli
+## available cli
 
-any suggestion visit:
+| cli                         | option                                       | description                                   | version |
+| --------------------------- | -------------------------------------------- | --------------------------------------------- | ------- |
+| uv rc <folderPath> [option] | --css, --styleModule, --single, --reactClass | create react files                            | v1      |
+| uv rd <folderPath>          | none                                         | create redux files                            | v1      |
+| uv toModule <filePath>      | none                                         | convert normal react css/scss to module style | v2      |
 
-https://github.com/UVcoder/cli-uv
+any more cli suggestion visit: https://github.com/UVcoder/cli-uv
+note it doest have to be related to react; i plan to add angular cli also;
 
 ## install
 
@@ -28,7 +36,7 @@ you need to install it globally;
 
 Run
 
-> `uv rc <path>`
+> `uv rc <folderPath>`
 
 <br>
 Example
@@ -75,14 +83,14 @@ export default UsersAdmin;
 }
 ```
 
-## command
+## option
 
-| cmd short | cmd full        | default | description          |
-| --------- | --------------- | ------- | -------------------- |
-| none      | - - css         | false   | use scss style       |
-| -m        | - - styleModule | false   | style without module |
-| -s        | - - single      | false   | without style file   |
-| -c        | - - reactClass  | false   | user react function  |
+| short | full            | default | description if true  |
+| ----- | --------------- | ------- | -------------------- |
+| none  | - - css         | false   | use css style        |
+| -m    | - - styleModule | false   | use module style     |
+| -s    | - - single      | false   | only react component |
+| -c    | - - reactClass  | false   | use react class      |
 
 ### Note\*
 
@@ -101,8 +109,8 @@ project
 └─ src
 │   └─ components
 │   │   └─ card-gold
-│   │   │   │ card-gold.jsx
-│   │   │   │ card-gold.styles.module.scss
+│   │   │   │ card-gold-component.jsx
+│   │   │   │ card-gold-styles.module.scss
 
 ```
 
@@ -119,8 +127,8 @@ project
 └─ src
 │   └─ components
 │   │   └─ card-gold
-│   │   │   │ card-gold.jsx
-│   │   │   │ card-gold.styles.css
+│   │   │   │ card-gold-component.jsx
+│   │   │   │ card-gold-styles.module.css
 
 ```
 
@@ -128,7 +136,7 @@ project
 
 Run
 
-> `uv rd <path>`
+> `uv rd <folderPath>`
 
 <br>
 Example
