@@ -2,10 +2,10 @@ const modifyFile = require("../node-fnc/modify-file");
 const appCliPath = require("../node-fnc/get-source-path")();
 const path = require("path");
 const _ = require("lodash");
+const escapePathName = require("../node-fnc/escape-pathname");
 
 const createReact = async (userPath, cmd) => {
-  const regex = /[<>:"\\|?*;'.]/gi;
-  userPath = userPath.replace(regex, "-").toLocaleLowerCase();
+  userPath = escapePathName(userPath);
   console.log("requested path".cyan, userPath);
 
   // const style = cmd.css?"css":"scss";
@@ -94,10 +94,10 @@ const reactPath = {
   function: `${path.join(appCliPath, "/templates/react/function")}`,
   style: `${path.join(appCliPath, "/templates/react/style")}`
 };
-function getDestPath(path, tailing) {
-  const folder = path.split("/");
+function getDestPath(filePath, tailing) {
+  const folder = filePath.split("/");
   const name = folder[folder.length - 1].toLocaleLowerCase();
-  return `./src/${path}/${name}${tailing}`;
+  return path.join(`./src/${filePath}/${name}${tailing}`);
 }
 function getDestName(path) {
   const folder = path.split("/");
