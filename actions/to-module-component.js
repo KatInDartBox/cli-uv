@@ -11,6 +11,7 @@ const readFile = require("../node-fnc/read-file");
 const writeFile = require("../node-fnc/write-file");
 
 let cssPath = "";
+let cssModulePath = "";
 
 const toModuleStyle = async (requestPath, cmd) => {
   try {
@@ -26,6 +27,7 @@ const toModuleStyle = async (requestPath, cmd) => {
     await writeFile(filePath, cssData, `updated to module component at ${filePath}`);
 
     if (notIncludeStyle) {
+      console.log(`pls manually rename your style file to ${cssModulePath}`.red);
     } else {
       await toCamel(getRelativePath(requestPath, cssPath));
     }
@@ -43,8 +45,9 @@ function getCssPathDataAndSetCssPath(data) {
     const reg = /import.*?["']\s*(.+)(\.s?css)\s*["']/;
     const newData = data.replace(reg, (match, content, tailing) => {
       if (match) {
-        cssPath = content + tailing;
-        return `import style from '${cssPath}'`;
+        cssPath = `${content}${tailing}`;
+        cssModulePath = `${content}.module${tailing}`;
+        return `import style from "${cssModulePath}"`;
       }
     });
     resolve(newData);

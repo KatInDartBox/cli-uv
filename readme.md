@@ -8,7 +8,11 @@ this cli aims to speed up your react development experience, now u dont have to 
 - hundred of redux file -v1.0.1
 - convert scss/css component to module style -v1.1.0
 - convert scss/css style to camel style -v1.1.0
-- reverse module style to scss/css -v1.2.0 -not yet supported
+
+## future release
+
+- reverse module style to scss/css
+- create angular module
 
 any suggestion visit: https://github.com/UVcoder/cli-uv
 
@@ -19,8 +23,7 @@ any suggestion visit: https://github.com/UVcoder/cli-uv
 | uv rc <folderPath> [option]     | --css, --styleModule, --single, --reactClass | create react files                            |
 | uv rd <folderPath>              | none                                         | create redux files                            |
 | uv toModule <filePath> [option] | --notIncludeStyle                            | convert normal react css/scss to module style |
-
-note it doest have to be related to react; i plan to add angular module cli also;
+| uv toCamel <cssFilePath>        | none                                         | convert normal css/scss to camel style        |
 
 ## install
 
@@ -283,12 +286,12 @@ Example
 
 ```javascript
 import React from "react";
-import "../styles/admin-gold-styles.scss";
-import "  ./admin-gold-styles2.css   ";
-import "  ./admin-gold-styles3.scss   ";
-import "  ./admin-gold-styles4.scss   ";
+import "../styles/admin-styles.scss";
+import "  ./admin-styles2.css   ";
+import "  ./admin-styles3.scss   ";
+import "  ./admin-styles4.scss   ";
 
-const AdminGold = () => {
+const Admin = () => {
   return (
     <div className="my-name.is.style">
       <div className="   my-name.is.style    "></div>
@@ -324,13 +327,13 @@ const AdminGold = () => {
   );
 };
 
-export default AdminGold;
+export default Admin;
 ```
 
 ### style
 
 ```javascript
-.adminGold {
+.admin {
   background-attachment: fixed;
 }
 .fa$ser {
@@ -362,17 +365,16 @@ export default AdminGold;
 
 ### react component
 
-className={...} is not currently supported
 any invalid css name will be omitted!
 
 ```javascript
 import React from "react";
-import style from "../styles/admin-gold-styles.scss";
-import "  ./admin-gold-styles2.css   ";
-import "  ./admin-gold-styles3.scss   ";
-import "  ./admin-gold-styles4.scss   ";
+import style from "../styles/admin-styles.module.scss";
+import "  ./admin-styles2.css   ";
+import "  ./admin-styles3.scss   ";
+import "  ./admin-styles4.scss   ";
 
-const AdminGold = () => {
+const Admin = () => {
   return (
     <div className={` ${style.myNameIsStyle} `}>
       <div className={` ${style.myNameIsStyle} `}></div>
@@ -399,7 +401,7 @@ const AdminGold = () => {
   );
 };
 
-export default AdminGold;
+export default Admin;
 ```
 
 ### style
@@ -407,7 +409,7 @@ export default AdminGold;
 any invalid css name will be omitted!
 
 ```javascript
-.adminGold {
+.admin {
   background-attachment: fixed;
 }
 .faSer {
