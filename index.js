@@ -8,6 +8,7 @@ const createReact = require("./actions/create-react");
 const createRedux = require("./actions/create-redux");
 const toModuleStyle = require("./actions/to-module-component");
 const toCamel = require("./actions/to-camel");
+const test = require("./actions/test");
 
 program.version("1.0.0");
 
@@ -30,5 +31,7 @@ program
   .action(toModuleStyle);
 
 program.command("toCamel <cssFilePath>").action(toCamel);
+
+program.command("test <filePath>").action(test);
 
 program.parse(process.argv);
