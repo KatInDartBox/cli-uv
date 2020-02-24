@@ -1,24 +1,26 @@
 # cli-uv
 
-facebook gave us react, literately only react; they dont care what technology, what framework, we do with react;
-seems like, they gave us a really good meal without a spoon; this cli aims to be a spoon however not completely, but somehow
-to speed up your coding experience;
+## introduction
 
-this cli comes with react cli, redux cli, and mores to come;
-use react cli when u want to add new react component/style without manually creating it;
-redux cli comes with 5 boilerplate files, which help speed up your app development a lot,
-unless you do it manually;
+this cli aims to speed up your react development experience, now u dont have to create
+
+- your react class/functional component -v1.0.0
+- hundred of redux file -v1.0.1
+- convert scss/css component to module style -v1.1.0
+- convert scss/css style to camel style -v1.1.0
+- reverse module style to scss/css -v1.2.0 -not yet supported
+
+any suggestion visit: https://github.com/UVcoder/cli-uv
 
 ## available cli
 
-| cli                         | option                                       | description                                   | version |
-| --------------------------- | -------------------------------------------- | --------------------------------------------- | ------- |
-| uv rc <folderPath> [option] | --css, --styleModule, --single, --reactClass | create react files                            | v1      |
-| uv rd <folderPath>          | none                                         | create redux files                            | v1      |
-| uv toModule <filePath>      | none                                         | convert normal react css/scss to module style | v2      |
+| cli                             | option                                       | description                                   |
+| ------------------------------- | -------------------------------------------- | --------------------------------------------- |
+| uv rc <folderPath> [option]     | --css, --styleModule, --single, --reactClass | create react files                            |
+| uv rd <folderPath>              | none                                         | create redux files                            |
+| uv toModule <filePath> [option] | --notIncludeStyle                            | convert normal react css/scss to module style |
 
-any more cli suggestion visit: https://github.com/UVcoder/cli-uv
-note it doest have to be related to react; i plan to add angular cli also;
+note it doest have to be related to react; i plan to add angular module cli also;
 
 ## install
 
@@ -28,6 +30,8 @@ note it doest have to be related to react; i plan to add angular cli also;
 
 to be able to run this command
 
+example:
+
 > `uv rc users/admin`
 
 you need to install it globally;
@@ -36,7 +40,20 @@ you need to install it globally;
 
 Run
 
-> `uv rc <folderPath>`
+> `uv rc <folderPath> [option]`
+
+## option
+
+| short | full            | default | description if true  |
+| ----- | --------------- | ------- | -------------------- |
+| none  | - - css         | false   | use css style        |
+| -m    | - - styleModule | false   | use module style     |
+| -s    | - - single      | false   | only react component |
+| -c    | - - reactClass  | false   | use react class      |
+
+### Note\*
+
+the above command if provided, its value becomes true;
 
 <br>
 Example
@@ -52,19 +69,19 @@ project
 └─ src
 │   └─ pages
 │   │   └─ users-admin
-│   │   │   │ users-admin.jsx
-│   │   │   │ users-admin.styles.scss
+│   │   │   │ users-admin-component.jsx
+│   │   │   │ users-admin-styles.scss
 
 ```
 
 <br>
 
-## users-admin.jsx
+## users-admin-component.jsx
 
 ```javascript
 import React from "react";
 // import PropTypes from 'prop-types';
-import "./users-admin.styles.scss";
+import "./users-admin-styles.scss";
 
 const UsersAdmin = () => {
   return <div className="usersAdmin"></div>;
@@ -75,7 +92,7 @@ const UsersAdmin = () => {
 export default UsersAdmin;
 ```
 
-## users-styles.scss
+## users-admin-styles.scss
 
 ```javascript
 .usersAdmin{
@@ -83,20 +100,7 @@ export default UsersAdmin;
 }
 ```
 
-## option
-
-| short | full            | default | description if true  |
-| ----- | --------------- | ------- | -------------------- |
-| none  | - - css         | false   | use css style        |
-| -m    | - - styleModule | false   | use module style     |
-| -s    | - - single      | false   | only react component |
-| -c    | - - reactClass  | false   | use react class      |
-
-### Note\*
-
-the above command if provided, its value becomes true;
-
-### example
+### example with option
 
 > `uv rc components/card-gold -m`
 
@@ -242,6 +246,193 @@ export const UsersAdminType = {
 // export const addItem = (existingItems, itemToBeAdded) => {
 //   return [...existingItems, itemToBeAdded];
 // };
+```
+
+## toModule & toCamel Cli
+
+Run
+to convert react component & style to module style
+
+> `uv toModule <filePath> [option]`
+
+## option
+
+| short | full                | default | description if true                                |
+| ----- | ------------------- | ------- | -------------------------------------------------- |
+| -n    | - - notIncludeStyle | false   | update only component style, not touching scss/css |
+
+Run
+to convert only style to camel style
+
+> `uv toCamel <cssFilePath>`
+
+## note\*
+
+by default it will try to convert both component & style file;<br>
+it will try to find any first match scss/css file & make conversion;
+add `-n` or `--notIncludeStyle` to convert only component;
+
+<br>
+Example
+
+> `uv toModule users/admin-component.jsx`
+
+## before conversion
+
+### react component
+
+```javascript
+import React from "react";
+import "../styles/admin-gold-styles.scss";
+import "  ./admin-gold-styles2.css   ";
+import "  ./admin-gold-styles3.scss   ";
+import "  ./admin-gold-styles4.scss   ";
+
+const AdminGold = () => {
+  return (
+    <div className="my-name.is.style">
+      <div className="   my-name.is.style    "></div>
+      <div className={`"my-name-is-style title name" ${time}`}></div>
+      <div
+        className={`my-name-is-style title name 
+          ${time}
+
+
+
+
+          `}
+      ></div>
+
+      <div
+        className="
+          my-name.is
+          style
+                aser
+                sadf.-name
+                faser-eraxx
+
+                $/myname$true
+                09time$load
+                "
+      ></div>
+
+      <div className="my-name.is.style"></div>
+      <div className="my-name.is.style"></div>
+      <div className="my-name.is.style"></div>
+      <div className="my-name.is.style"></div>
+    </div>
+  );
+};
+
+export default AdminGold;
+```
+
+### style
+
+```javascript
+.adminGold {
+  background-attachment: fixed;
+}
+.fa$ser {
+  color: red;
+}
+.a\er {
+  position: relative;
+}
+.34fasb {
+  background-origin: padding-box;
+}
+. faser234 {
+  transform: rotate();
+}
+.-faser {
+  color: red;
+}
+.$faer909 {
+  background: red;
+}
+./\-fas/\er234- {
+  border: 1px solid red;
+}
+
+
+```
+
+## after conversion
+
+### react component
+
+className={...} is not currently supported
+any invalid css name will be omitted!
+
+```javascript
+import React from "react";
+import style from "../styles/admin-gold-styles.scss";
+import "  ./admin-gold-styles2.css   ";
+import "  ./admin-gold-styles3.scss   ";
+import "  ./admin-gold-styles4.scss   ";
+
+const AdminGold = () => {
+  return (
+    <div className={` ${style.myNameIsStyle} `}>
+      <div className={` ${style.myNameIsStyle} `}></div>
+      <div className={`"my-name-is-style title name" ${time}`}></div>
+      <div
+        className={`my-name-is-style title name 
+          ${time}
+
+
+
+
+          `}
+      ></div>
+
+      <div
+        className={` ${style.myNameIs} ${style.style} ${style.aser} ${style.sadfName} ${style.faserEraxx} ${style.mynameTrue} ${style.timeLoad} `}
+      ></div>
+
+      <div className={` ${style.myNameIsStyle} `}></div>
+      <div className={` ${style.myNameIsStyle} `}></div>
+      <div className={` ${style.myNameIsStyle} `}></div>
+      <div className={` ${style.myNameIsStyle} `}></div>
+    </div>
+  );
+};
+
+export default AdminGold;
+```
+
+### style
+
+any invalid css name will be omitted!
+
+```javascript
+.adminGold {
+  background-attachment: fixed;
+}
+.faSer {
+  color: red;
+}
+.aEr {
+  position: relative;
+}
+.fasb {
+  background-origin: padding-box;
+}
+.faser234 {
+  transform: rotate();
+}
+.faser {
+  color: red;
+}
+.faer909 {
+  background: red;
+}
+.fasEr234 {
+  border: 1px solid red;
+}
+
+
 ```
 
 ## but-fix

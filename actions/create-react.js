@@ -6,7 +6,7 @@ const escapePathName = require("../node-fnc/escape-pathname");
 
 const createReact = async (userPath, cmd) => {
   userPath = escapePathName(userPath);
-  console.log("requested path".cyan, userPath);
+  console.log(`received requested file at ./src/${userPath}`.cyan);
 
   // const style = cmd.css?"css":"scss";
   const { css = false, styleModule = false, single = false, reactClass = false } = cmd;
@@ -19,7 +19,7 @@ const createReact = async (userPath, cmd) => {
     await addStyle(userPath, styleTail);
   }
 
-  console.log("files were created!".cyan, { css, styleModule, single, reactClass });
+  console.log("files created!".cyan, { css, styleModule, single, reactClass });
 };
 
 function addStyle(userPath, styleTail) {

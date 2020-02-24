@@ -2,7 +2,7 @@ const fs = require("fs-extra");
 function readFile(filePath) {
   return new Promise((resolve, reject) => {
     if (!fs.existsSync(filePath)) {
-      console.log(`file not found at '${filePath}'`.red);
+      console.log(`file not found at ${filePath}`.red);
       process.exit(1);
       // reject(`file not found at ${filePath}`.red);
     }

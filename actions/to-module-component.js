@@ -16,18 +16,18 @@ const toModuleStyle = async (requestPath, cmd) => {
   try {
     const filePath = getDestPath(requestPath);
     const notIncludeStyle = cmd.notIncludeStyle ? true : false;
-    console.log("requested path".cyan, filePath);
+    console.log(`received requested file at ${filePath}`.cyan);
 
     const data = await readFile(filePath);
     const componentData = await getComponentData(data);
     await writeFile(filePath, componentData);
 
     const cssData = await getCssPathDataAndSetCssPath(componentData);
-    await writeFile(filePath, cssData, `updated file at '${filePath}'`);
+    await writeFile(filePath, cssData, `updated to module component at ${filePath}`);
 
     if (notIncludeStyle) {
     } else {
-      await toCamel(getRelativePath(filePath, cssPath));
+      await toCamel(getRelativePath(requestPath, cssPath));
     }
   } catch (error) {
     throw error;
@@ -66,6 +66,10 @@ function getComponentData(data) {
           }
         });
         return `className = {\` ${newCls.join(" ")} \`}`;
+      } else {
+        // dont delete this
+        // now support case ` {  look forward in the future
+        return match;
       }
     });
     resolve(newData);

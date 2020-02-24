@@ -7,7 +7,7 @@ const escapePathName = require("../node-fnc/escape-pathname");
 
 const createRedux = async (userPath, cmd) => {
   userPath = escapePathName(userPath);
-  console.log("requested path".cyan, userPath);
+  console.log(`received requested file at ./src/${userPath}`.cyan);
   // console.log("cmd", cmd.template);
 
   // userPath is require no need to check;
@@ -17,7 +17,7 @@ const createRedux = async (userPath, cmd) => {
   await createSelector(userPath);
   await createType(userPath);
   await createUtil(userPath);
-  console.log("files were created!".cyan);
+  console.log("files created!".cyan);
 };
 
 function createAction(path) {

@@ -1,6 +1,6 @@
 {
   "name": "cli-uv",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "simple react & redux cli",
   "main": "index.js",
   "bin": {

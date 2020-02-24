@@ -13,11 +13,11 @@ const writeFile = require("../node-fnc/write-file");
 const toCamel = async (filePath, cmd) => {
   try {
     const destPath = getDestPath(filePath);
-    console.log(`request css file path at '${destPath}'`.cyan);
+    console.log(`receive requested css file at ${destPath}`.cyan);
 
     const data = await readFile(destPath);
     const cssCamelData = await getCssCamelData(data);
-    await writeFile(destPath, cssCamelData, `updated to camel style at '${destPath}'`);
+    await writeFile(destPath, cssCamelData, `updated to camel style at ${destPath}`);
   } catch (error) {
     throw error;
   }
