@@ -19,7 +19,8 @@ const createReact = async (userPath, cmd) => {
     await addStyle(userPath, styleTail);
   }
 
-  console.log("files created!".cyan, { css, styleModule, single, reactClass });
+  console.log("files created!".cyan);
+  console.log("your option: ".cyan, { css, styleModule, single, reactClass });
 };
 
 function addStyle(userPath, styleTail) {

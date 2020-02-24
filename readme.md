@@ -6,8 +6,8 @@ this cli aims to speed up your react development experience, now u dont have to 
 
 - your react class/functional component -v1.0.0
 - hundred of redux file -v1.0.1
-- convert scss/css component to module style -v1.1.0
-- convert scss/css style to camel style -v1.1.0
+- convert scss/css component to module style -v1.2.0
+- convert scss/css style to camel style -v1.2.0
 
 ## future release
 
