@@ -2,12 +2,12 @@
   "name": "cli-uv",
   "version": "1.2.0",
   "description": "simple react & redux cli",
-  "main": "index.js",
+  "main": "src/index.js",
   "bin": {
-    "uv": "index.js"
+    "uv": "src/index.js"
   },
   "scripts": {
-    "start": ""
+    "rd": "node src/index.js rd test/redux/users-admin"
   },
   "author": "uk vichetch",
   "license": "MIT",

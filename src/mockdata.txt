@@ -1,0 +1,22 @@
+`
+      flex ${
+            last + 
+            time
+            }
+      flex-column 
+      txt-info
+      flex-center ${title}
+      guest-product
+      title
+      txt-info ${item - fast}
+      flex-start
+      12invalid ${
+            time
+      } ${other}
+      21-other
+      32-what-else 
+      
+      ` 
+      +
+
+`other match` + ` ` "i am string" + variable + 'also string'

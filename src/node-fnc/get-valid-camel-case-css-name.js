@@ -5,10 +5,10 @@ function extractCssName(name) {
   return match ? match.join("") : null;
 }
 
-function getValidCssName(name) {
+function getValidCamelCaseCssName(name) {
   const camel = _.camelCase(name);
   const extractCss = extractCssName(camel);
   return extractCss ? _.camelCase(extractCss) : null;
 }
 
-module.exports = getValidCssName;
+module.exports = getValidCamelCaseCssName;

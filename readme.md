@@ -437,7 +437,7 @@ any invalid css name will be omitted!
 
 ```
 
-## but-fix
+## change log
 
 ### v1.0.1
 

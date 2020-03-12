@@ -10,7 +10,7 @@ const createRedux = async (userPath, cmd) => {
   console.log(`received requested file at ./src/${userPath}`.cyan);
   // console.log("cmd", cmd.template);
 
-  // userPath is require no need to check;
+  // console.log("redux path", reduxPath);
   // const isTemplate = cmd.template ? true : false;
   await createAction(userPath);
   await createReducer(userPath);
