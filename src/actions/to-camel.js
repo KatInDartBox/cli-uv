@@ -3,7 +3,6 @@ const path = require("path");
 const _ = require("lodash");
 const fs = require("fs-extra");
 
-const getValidCssName = require("../node-fnc/get-valid-camel-case-css-name");
 const readFile = require("../node-fnc/read-file");
 const writeFile = require("../node-fnc/write-file");
 const renameFile = require("../node-fnc/rename-file");

@@ -2,28 +2,27 @@
 
 ## introduction
 
-this cli aims to speed up your react development experience, now u dont have to create
+keys features
 
-- your react class/functional component -v1.0.0
-- hundred of redux file -v1.0.1
-- convert scss/css component to module style -v1.2.0
-- convert scss/css style to camel style -v1.2.0
+- create react class/functional component
+- create boilerplate redux file
+- convert scss/css component to module style
+- reverse module styled component to normal style
 
-## future release
+## note\*
 
-- reverse module style to scss/css
-- create angular module
+your source folder path must be "src"
 
 any suggestion visit: https://github.com/UVcoder/cli-uv
 
 ## available cli
 
-| cli                             | option                                       | description                                   |
-| ------------------------------- | -------------------------------------------- | --------------------------------------------- |
-| uv rc <folderPath> [option]     | --css, --styleModule, --single, --reactClass | create react files                            |
-| uv rd <folderPath>              | none                                         | create redux files                            |
-| uv toModule <filePath> [option] | --notIncludeStyle                            | convert normal react css/scss to module style |
-| uv toCamel <cssFilePath>        | none                                         | convert normal css/scss to camel style        |
+| cli                                 | option                                       | description                                   |
+| ----------------------------------- | -------------------------------------------- | --------------------------------------------- |
+| `uv rc <folderPath> [option]`       | --css, --styleModule, --single, --reactClass | create react files                            |
+| `uv rd <folderPath>`                | none                                         | create redux files                            |
+| `uv toModule <filePath> [option]`   | --notIncludeStyle                            | convert normal react css/scss to module style |
+| `uv toCamel <cssFilePath> [option]` | --absolute                                   | convert normal css/scss to camel style        |
 
 ## install
 
@@ -251,10 +250,9 @@ export const UsersAdminType = {
 // };
 ```
 
-## toModule & toCamel Cli
+## toModule cli
 
-Run
-to convert react component & style to module style
+convert react component & style to module style, or reverse back to normal style
 
 > `uv toModule <filePath> [option]`
 
@@ -263,22 +261,20 @@ to convert react component & style to module style
 | short | full                | default | description if true                                |
 | ----- | ------------------- | ------- | -------------------------------------------------- |
 | -n    | - - notIncludeStyle | false   | update only component style, not touching scss/css |
+| -a    | - - absolute        | false   | ref to absolute path                               |
+| -r    | - - reverse         | false   | reverse module styled component to normal style    |
 
-Run
-to convert only style to camel style
+example:
 
-> `uv toCamel <cssFilePath>`
+> `uv toModule "d:/code projects/cli/cli-uv/src/components/product/guest-product-component.jsx" -a`
 
-## note\*
+### relative path to src
 
-by default it will try to convert both component & style file;<br>
-it will try to find any first match scss/css file & make conversion;
-add `-n` or `--notIncludeStyle` to convert only component;
+> `uv toModule components/product/guest-product-component.jsx`
 
-<br>
-Example
-
-> `uv toModule users/admin-component.jsx`
+i like absolute path as i can drag & drop file; (don't have to write that long path);
+absolute path should be true by default, yet i first introduce relative path in earlier version,
+so ...
 
 ## before conversion
 
@@ -286,78 +282,122 @@ Example
 
 ```javascript
 import React from "react";
-import "../styles/admin-styles.scss";
-import "  ./admin-styles2.css   ";
-import "  ./admin-styles3.scss   ";
-import "  ./admin-styles4.scss   ";
+import "./module-styles.module.scss";
 
-const Admin = () => {
+const GuestProduct = () => {
   return (
-    <div className="my-name.is.style">
-      <div className="   my-name.is.style    "></div>
-      <div className={`"my-name-is-style title name" ${time}`}></div>
-      <div
-        className={`my-name-is-style title name 
-          ${time}
+    <div
+      className={
+        `
+      flex ${last + time}
+      flex-column 
+      flex-center ${title}${other}
+      guest-product
+      title
+      txt-info ${item - fast}
+      flex-start
+      12invalid ${time} 
+      ${other}
+      21-other
+      32-what-else
+      ` +
+        variable +
+        `flex title` +
+        "i am title" +
+        "also title"
+      }
+    >
+      <div className=" title ">Pay Nothing & Have it ALL</div>
+      <div className=" txt-info ">suitable from small to Large business </div>
 
-
-
-
-          `}
-      ></div>
-
-      <div
-        className="
-          my-name.is
-          style
-                aser
-                sadf.-name
-                faser-eraxx
-
-                $/myname$true
-                09time$load
-                "
-      ></div>
-
-      <div className="my-name.is.style"></div>
-      <div className="my-name.is.style"></div>
-      <div className="my-name.is.style"></div>
-      <div className="my-name.is.style"></div>
+      <div className=" product ">
+        {ProductInfo.map(pro => (
+          <Card key={pro.id} title={pro.title} icon={pro.icon} content={pro.content} />
+        ))}
+      </div>
+      <div className=" txt-info txt-info-sm ">Integrated with Role Base System Management</div>
     </div>
   );
 };
 
-export default Admin;
+const Card = ({ title, icon, content }) => {
+  return (
+    <Box className=" card " bgcolor="background.paper" boxShadow={3}>
+      <div className=" icon ">{icon}</div>
+      <div className=" title-card ">{title.toUpperCase()}</div>
+      <div className=" product-content ">{content}</div>
+    </Box>
+  );
+};
+
+export default GuestProduct;
 ```
 
 ### style
 
 ```javascript
-.admin {
-  background-attachment: fixed;
+.guestProduct {
+  width: 80%;
 }
-.fa$ser {
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 16px;
+  width: 215px;
+  height: 270px;
+  padding: 14px;
+  text-align: center;
+}
+.title {
+  color: $col-yellow;
+  font-size: 36px;
+  text-align: center;
+}
+.icon {
+  font-size: 4.2rem;
+}
+.titleCard {
+  text-transform: uppercase;
+  color: $col-yellow;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 6px;
+}
+.txtInfo {
+  // font-size: 11px;
+  text-align: center;
+}
+.product {
+  display: flex;
+  width: 720px;
+  justify-content: space-around;
+  margin: 17px 0;
+}
+@media (max-width: 600px) {
+  .product {
+    flex-direction: column;
+    align-items: center;
+  }
+  .guestProduct {
+    justify-content: flex-start;
+  }
+  .card {
+    margin: 12px 0;
+  }
+  .txtInfoSm {
+    margin-bottom: 24px;
+  }
+}
+@media (max-width: 1070px) {
+  .txtInfoSm {
+    margin-bottom: 24px;
+  }
+}
+.other {
   color: red;
 }
-.a\er {
-  position: relative;
-}
-.34fasb {
-  background-origin: padding-box;
-}
-. faser234 {
-  transform: rotate();
-}
-.-faser {
-  color: red;
-}
-.$faer909 {
-  background: red;
-}
-./\-fas/\er234- {
-  border: 1px solid red;
-}
-
 
 ```
 
@@ -365,80 +405,177 @@ export default Admin;
 
 ### react component
 
-any invalid css name will be omitted!
+any class name which is not found in scss/css file will not be converted to \${style.name};
+in this way, you can have component scoped and also be able to use global style;
+
+> `flex flex-column flex-center flex-start 12invalid 21-other 32-what-else i am also product-content`
+> remain the same, as it is not listed in css file;
 
 ```javascript
 import React from "react";
-import style from "../styles/admin-styles.module.scss";
-import "  ./admin-styles2.css   ";
-import "  ./admin-styles3.scss   ";
-import "  ./admin-styles4.scss   ";
+import style from "./module-styles.module.scss";
 
-const Admin = () => {
+const GuestProduct = () => {
   return (
-    <div className={` ${style.myNameIsStyle} `}>
-      <div className={` ${style.myNameIsStyle} `}></div>
-      <div className={`"my-name-is-style title name" ${time}`}></div>
-      <div
-        className={`my-name-is-style title name 
-          ${time}
+    <div
+      className={
+        `${last + time} ${title} ${other} ${item - fast} ${time} ${other} ${style.guestProduct} ${style.title} ${
+          style.txtInfo
+        }  flex  flex-column  flex-center   flex-start 12invalid   21-other 32-what-else` +
+        variable +
+        ` ${style.title} flex` +
+        `${style.title} i am` +
+        `${style.title} also`
+      }
+    >
+      <div className={`${style.title} `}>Pay Nothing & Have it ALL</div>
+      <div className={`${style.txtInfo} `}>suitable from small to Large business </div>
 
-
-
-
-          `}
-      ></div>
-
-      <div
-        className={` ${style.myNameIs} ${style.style} ${style.aser} ${style.sadfName} ${style.faserEraxx} ${style.mynameTrue} ${style.timeLoad} `}
-      ></div>
-
-      <div className={` ${style.myNameIsStyle} `}></div>
-      <div className={` ${style.myNameIsStyle} `}></div>
-      <div className={` ${style.myNameIsStyle} `}></div>
-      <div className={` ${style.myNameIsStyle} `}></div>
+      <div className={`${style.product} `}>
+        {ProductInfo.map(pro => (
+          <Card key={pro.id} title={pro.title} icon={pro.icon} content={pro.content} />
+        ))}
+      </div>
+      <div className={`${style.txtInfo} ${style.txtInfoSm} `}>Integrated with Role Base System Management</div>
     </div>
   );
 };
 
-export default Admin;
+const Card = ({ title, icon, content }) => {
+  return (
+    <Box className={`${style.card} `} bgcolor="background.paper" boxShadow={3}>
+      <div className={`${style.icon} `}>{icon}</div>
+      <div className={`${style.titleCard} `}>{title.toUpperCase()}</div>
+      <div className={` product-content`}>{content}</div>
+    </Box>
+  );
+};
+
+export default GuestProduct;
 ```
 
 ### style
 
-any invalid css name will be omitted!
+pls noted that as we convert your class name to camel case,
+any class name with preceding or tailing "-" will be omitted;
+`-my-new-style` will become `myNewStyle'
 
 ```javascript
-.admin {
-  background-attachment: fixed;
+.guestProduct {
+  width: 80%;
 }
-.faSer {
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 16px;
+  width: 215px;
+  height: 270px;
+  padding: 14px;
+  text-align: center;
+}
+.title {
+  color: $col-yellow;
+  font-size: 36px;
+  text-align: center;
+}
+.icon {
+  font-size: 4.2rem;
+}
+.titleCard {
+  text-transform: uppercase;
+  color: $col-yellow;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 6px;
+}
+.txtInfo {
+  // font-size: 11px;
+  text-align: center;
+}
+.product {
+  display: flex;
+  width: 720px;
+  justify-content: space-around;
+  margin: 17px 0;
+}
+@media (max-width: 600px) {
+  .product {
+    flex-direction: column;
+    align-items: center;
+  }
+  .guestProduct {
+    justify-content: flex-start;
+  }
+  .card {
+    margin: 12px 0;
+  }
+  .txtInfoSm {
+    margin-bottom: 24px;
+  }
+}
+@media (max-width: 1070px) {
+  .txtInfoSm {
+    margin-bottom: 24px;
+  }
+}
+.other {
   color: red;
 }
-.aEr {
-  position: relative;
-}
-.fasb {
-  background-origin: padding-box;
-}
-.faser234 {
-  transform: rotate();
-}
-.faser {
-  color: red;
-}
-.faer909 {
-  background: red;
-}
-.fasEr234 {
-  border: 1px solid red;
-}
-
 
 ```
 
-## change log
+## reverse your module style back to normal style
 
-### v1.0.1
+example:
 
-fix component & style namespace
+> `uv toModule "d:/code projects/cli/cli-uv/src/components/product/guest-product-component.jsx" -a -r`
+
+### react component
+
+```javascript
+import React from "react";
+import "./module-styles.module.scss";
+
+const GuestProduct = () => {
+  return (
+    <div
+      className={
+        `${last + time} ${title} ${other} ${item -
+          fast} ${time} ${other} guestProduct title txtInfo  flex  flex-column  flex-center   flex-start 12invalid   21-other 32-what-else` +
+        variable +
+        ` title flex` +
+        `title i am` +
+        `title also`
+      }
+    >
+      <div className={`title `}>Pay Nothing & Have it ALL</div>
+      <div className={`txtInfo `}>suitable from small to Large business </div>
+
+      <div className={`product `}>
+        {ProductInfo.map(pro => (
+          <Card key={pro.id} title={pro.title} icon={pro.icon} content={pro.content} />
+        ))}
+      </div>
+      <div className={`txtInfo txtInfoSm `}>Integrated with Role Base System Management</div>
+    </div>
+  );
+};
+
+const Card = ({ title, icon, content }) => {
+  return (
+    <Box className={`card `} bgcolor="background.paper" boxShadow={3}>
+      <div className={`icon `}>{icon}</div>
+      <div className={`titleCard `}>{title.toUpperCase()}</div>
+      <div className={` product-content`}>{content}</div>
+    </Box>
+  );
+};
+
+export default GuestProduct;
+```
+
+### style file
+
+remain camel case
