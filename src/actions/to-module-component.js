@@ -15,10 +15,13 @@ let cssPath = "";
 let cssModulePath = "";
 let srcName = "src";
 let isAbsolute = false;
+let styleName = "uvStyle";
 const toModuleStyle = async (requestPath, cmd) => {
   try {
     isAbsolute = cmd.absolute;
     srcName = cmd.src ? cmd.src : "src";
+    styleName = cmd.styleName ? cmd.styleName : "uvStyle";
+
     const notIncludeStyle = cmd.notIncludeStyle ? true : false;
     const isReverse = cmd.reverse ? true : false;
 
@@ -79,7 +82,7 @@ function getCssPathDataAndSetCssPath(data) {
         } else {
           cssModulePath = `${content}.module${tailing}`;
         }
-        return `import style from "${cssModulePath}"`;
+        return `import ${styleName} from "${cssModulePath}"`;
       }
     });
 
@@ -96,7 +99,7 @@ function _updateCssNameInsideString(content, blackList) {
     const validBlackList = blackList.map(css => _.camelCase(_.trim(css)));
 
     if (cssName && validBlackList.includes(_.camelCase(_.trim(item)))) {
-      item ? newClsStyle.push(`$\{style.${_.trim(_.camelCase(item))}\}`) : null;
+      item ? newClsStyle.push(`$\{${styleName}.${_.trim(_.camelCase(item))}\}`) : null;
     } else {
       item ? newCls.push(_.trim(item)) : null;
     }
@@ -122,7 +125,10 @@ function getReverseData(data) {
   return new Promise((resolve, reject) => {
     const reg = /className\s*=\s*(['"{])([\s\w\-+.\{\}`"\$\/]+)(['"}])/g;
     let newData = data.replace(reg, (match, openQuote, content, closeQuote) => {
-      const regStyle = /(\$\{\s*style\.)([\w\W]+?)(\})/g;
+      let regStyle = "(\\${\\s*" + styleName + "\\.)([\\w\\W]+?)(})";
+      regStyle = new RegExp(regStyle, "g");
+      // console.log("math style reverse", { styleName, reg: regStyle });
+
       const newContent = content.replace(regStyle, (match, style, body, closeBracket) => {
         return body;
       });

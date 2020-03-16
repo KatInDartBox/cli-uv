@@ -10,7 +10,7 @@ const toModuleStyle = require("./actions/to-module-component");
 const toCamel = require("./actions/to-camel");
 const test = require("./actions/test");
 
-program.version("1.2.0");
+program.version("1.2.2");
 
 program
   .command("rc <path>")
@@ -28,9 +28,10 @@ program
 program
   .command("toModule <filePath>")
   .option("-n,--notIncludeStyle", "will not convert scss/css file?")
-  .option("-s,--src <sourceName>", "source path")
+  .option("--src <sourceName>", "source path")
   .option("-a,--absolute", "is absolute path?")
   .option("-r,--reverse", "reverse to normal style")
+  .option("-s,--styleName <styleName>", "style name")
   .action(toModuleStyle);
 
 program

@@ -7,7 +7,7 @@ keys features
 - create react class/functional component
 - create boilerplate redux file
 - convert scss/css component to module style
-- reverse module styled component to normal style
+- reverse module style to normal style
 
 ## note\*
 
@@ -258,11 +258,12 @@ convert react component & style to module style, or reverse back to normal style
 
 ## option
 
-| short | full                | default | description if true                                |
-| ----- | ------------------- | ------- | -------------------------------------------------- |
-| -n    | - - notIncludeStyle | false   | update only component style, not touching scss/css |
-| -a    | - - absolute        | false   | ref to absolute path                               |
-| -r    | - - reverse         | false   | reverse module styled component to normal style    |
+| short | full                      | default | description if true                                |
+| ----- | ------------------------- | ------- | -------------------------------------------------- |
+| -n    | - - notIncludeStyle       | false   | update only component style, not touching scss/css |
+| -a    | - - absolute              | false   | ref to absolute path                               |
+| -r    | - - reverse               | false   | reverse module styled component to normal style    |
+| -s    | - - styleName <styleName> | uvStyle | style variable, default uvStyle                    |
 
 example:
 
@@ -275,6 +276,16 @@ example:
 i like absolute path as i can drag & drop file; (don't have to write that long path);
 absolute path should be true by default, yet i first introduce relative path in earlier version,
 so ...
+
+### change style variable from uvStyle to vvv
+
+> `uv toModule components/product/guest-product-component.jsx -s vvv`
+
+this will change
+`import uvStyle from "./my-style-path.module.scss"`
+to
+`import vvv from "./my-style-path.module.scss"`
+note\* if you change 'uvStyle', when reverse back to normal style, you must provide your changed style variable name;
 
 ## before conversion
 
@@ -335,8 +346,9 @@ export default GuestProduct;
 
 ### style
 
-```javascript
-.guestProduct {
+```
+@import "../../../../uv-commons/styles/variable.scss";
+.guest-product {
   width: 80%;
 }
 .card {
@@ -358,14 +370,14 @@ export default GuestProduct;
 .icon {
   font-size: 4.2rem;
 }
-.titleCard {
+.title-card {
   text-transform: uppercase;
   color: $col-yellow;
   font-size: 24px;
   text-align: center;
   margin-bottom: 6px;
 }
-.txtInfo {
+.txt-info {
   // font-size: 11px;
   text-align: center;
 }
@@ -380,24 +392,25 @@ export default GuestProduct;
     flex-direction: column;
     align-items: center;
   }
-  .guestProduct {
+  .guest-product {
     justify-content: flex-start;
   }
   .card {
     margin: 12px 0;
   }
-  .txtInfoSm {
+  .txt-info-sm {
     margin-bottom: 24px;
   }
 }
 @media (max-width: 1070px) {
-  .txtInfoSm {
+  .txt-info-sm {
     margin-bottom: 24px;
   }
 }
-.other {
+.-other {
   color: red;
 }
+
 
 ```
 
@@ -413,43 +426,44 @@ in this way, you can have component scoped and also be able to use global style;
 
 ```javascript
 import React from "react";
-import style from "./module-styles.module.scss";
+import uvStyle from "./module-styles.module.scss";
 
 const GuestProduct = () => {
   return (
     <div
       className={
-        `${last + time} ${title} ${other} ${item - fast} ${time} ${other} ${style.guestProduct} ${style.title} ${
-          style.txtInfo
+        `${last + time} ${title} ${other} ${item - fast} ${time} ${other} ${uvStyle.guestProduct} ${uvStyle.title} ${
+          uvStyle.txtInfo
         }  flex  flex-column  flex-center   flex-start 12invalid   21-other 32-what-else` +
         variable +
-        ` ${style.title} flex` +
-        `${style.title} i am` +
-        `${style.title} also`
+        ` ${uvStyle.title} flex` +
+        `${uvStyle.title} i am` +
+        `${uvStyle.title} also`
       }
     >
-      <div className={`${style.title} `}>Pay Nothing & Have it ALL</div>
-      <div className={`${style.txtInfo} `}>suitable from small to Large business </div>
+      <div className={`${uvStyle.title} `}>Pay Nothing & Have it ALL</div>
+      <div className={`${uvStyle.txtInfo} `}>suitable from small to Large business </div>
 
-      <div className={`${style.product} `}>
+      <div className={`${uvStyle.product} `}>
         {ProductInfo.map(pro => (
           <Card key={pro.id} title={pro.title} icon={pro.icon} content={pro.content} />
         ))}
       </div>
-      <div className={`${style.txtInfo} ${style.txtInfoSm} `}>Integrated with Role Base System Management</div>
+      <div className={`${uvStyle.txtInfo} ${uvStyle.txtInfoSm} `}>Integrated with Role Base System Management</div>
     </div>
   );
 };
-
 const Card = ({ title, icon, content }) => {
   return (
-    <Box className={`${style.card} `} bgcolor="background.paper" boxShadow={3}>
-      <div className={`${style.icon} `}>{icon}</div>
-      <div className={`${style.titleCard} `}>{title.toUpperCase()}</div>
+    <Box className={`${uvStyle.card} `} bgcolor="background.paper" boxShadow={3}>
+      <div className={`${uvStyle.icon} `}>{icon}</div>
+      <div className={`${uvStyle.titleCard} `}>{title.toUpperCase()}</div>
       <div className={` product-content`}>{content}</div>
     </Box>
   );
 };
+// GuestProduct.propTypes = {
+// }
 
 export default GuestProduct;
 ```
@@ -460,7 +474,7 @@ pls noted that as we convert your class name to camel case,
 any class name with preceding or tailing "-" will be omitted;
 `-my-new-style` will become `myNewStyle'
 
-```javascript
+```
 .guestProduct {
   width: 80%;
 }

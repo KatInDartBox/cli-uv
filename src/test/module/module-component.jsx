@@ -1,6 +1,31 @@
 import React from "react";
 import "./module-styles.module.scss";
+// import PropTypes from 'prop-types';
+import Box from "@material-ui/core/Box";
+import Hrm from "@material-ui/icons/SupervisedUserCircle";
+import Acc from "@material-ui/icons/Receipt";
+import Inv from "@material-ui/icons/StoreMallDirectory";
 
+const ProductInfo = [
+  {
+    id: "1",
+    title: "accounting",
+    icon: <Acc fontSize="inherit" />,
+    content: "Keeping track of your money. Managing, and reporting, just like one click away."
+  },
+  {
+    id: "2",
+    title: "inventory",
+    icon: <Inv fontSize="inherit" />,
+    content: `Stocking, Selling, & Moving your Product. Managing and Reporting your Asset, all in one place.`
+  },
+  {
+    id: "3",
+    title: "hrm",
+    icon: <Hrm fontSize="inherit" />,
+    content: `From your Recruiting, Promoting, Hiring, to Keeping Track of your Minute Meeting, never have been easier.`
+  }
+];
 const GuestProduct = () => {
   return (
     <div
@@ -24,7 +49,6 @@ const GuestProduct = () => {
     </div>
   );
 };
-
 const Card = ({ title, icon, content }) => {
   return (
     <Box className = { `card ` } bgcolor="background.paper" boxShadow={3}>
@@ -34,5 +58,7 @@ const Card = ({ title, icon, content }) => {
     </Box>
   );
 };
+// GuestProduct.propTypes = {
+// }
 
 export default GuestProduct;
